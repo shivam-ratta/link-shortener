@@ -1,0 +1,210 @@
+<section class="header">
+    <div class="container">
+        
+        <nav class="navbar navbar-expand-md navbar-light py-4">
+            <a class="navbar-brand fw-bold fs-4 " href="#">Shortly</a>
+            <button class="navbar-toggler" (click)="showNav()" [class.collapsed]="isCollapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" [class.show]="isShow" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-3 w-100">
+                <li class="nav-item active">
+                <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link " href="#">Resouces</a>
+                </li>
+                <li class="nav-item position-relative w-100">
+                    <div class="position-absolute nested-nav" style="right: 0;">
+                        <ul class="navbar-nav">
+                            <li  class="nav-item"><a class="nav-link " href="#">Login</a></li>
+                            <li  class="nav-item">
+                                <a class="nav-link disabled" href="#">
+                                    <button class="btn btn-info text-white signup-btn rounded-pill px-3">Sign up</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+               
+            </ul>
+            </div>
+        </nav>
+
+    </div>
+</section>
+
+<section class="my-lg-5 my-3 pb-5">
+    <div class="container pb-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-11 mx-auto">
+                <div class="fw-bold landing-intro lh-sm">More than just shorter links</div>
+                <p>Build your own brand's recognition and get detailed insights on how your links are performing.</p>
+                <button class="btn btn-info text-white rounded-pill px-4">Get Started</button>
+            </div>
+            <div class="col-md-6 col-11 mx-auto">
+                <img src="assets/images/illustration-working.svg" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light" style="background: transparent;">
+    <div class="container">
+        <div class="row">
+           <div class="w-100 " style="margin-top: -73px;">  
+                <div class="col-md-12 mb-5 px-0 position-relative col-11 mx-auto overflow-hidden custom-rounded" style=" background: url('assets/images/bg-boost-desktop.svg'); background-position:center ; background-size: cover;">
+                    <div class="position-absolute h-100 w-100" style="background-color: #4b3f6b; opacity: 0.7;" >
+                    </div>
+                    <form class="p-md-5 p-3 w-100" style="z-index: 999;" [formGroup]="shortenForm" (ngSubmit)="onSubmit()"> 
+                        <div class="row align-items-baseline justify-content-center position-relative" style="z-index: 99;">
+                            <div class="form-group col-md-10 col-12 my-2">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Shorten a link here" [formControlName]="'link'">
+                                <span class=" mt-1 fw-bold error position-absolute" >{{error}}</span>
+                            </div>
+                
+                            <div class="form-group col-md-2 col-12 my-2">
+                                <button type="submit" class="btn shortenBtn w-100 btn-info text-white">Shorten It!</button>
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+           
+
+                <div class="col-md-12 col-11  mx-auto bg-white  py-2 mb-3 custom-rounded" *ngFor="let items of getLinks ;  let i = index;">
+                    <div class="row  align-items-center">
+                        <div class="col-lg-7 col-md-6 col-11 px-4 py-1 mx-auto text-start link-wrapper">
+                            <input  type="text" class="form-control o fw-bold original-link-input" value="{{items.original_link}}" readonly>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-11 px-4 py-1 mx-auto text-end short-link-wrapper">
+                            <input #shortLink type="text" class="form-control text-info fw-bold shorten-link-input" value="{{items.full_short_link}}" readonly />
+                        </div>
+                        <div class="col-lg-2 col-md-3 px-4 py-1 col-11 mx-auto text-end">
+                            <button [ngClass]="items.buttonColor" class="btn copy-btn text-white px-4"  (click)="copyLink(shortLink, items, i)">{{items.button}}</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="py-5">
+                    <div class="fw-bold fs-3 text-center mt-3 mb-1">Advanced Statistics</div>
+                    <p class="text-center col-md-8 col-11 mx-auto text-secondary">Track how your links are performing across the web with our advanced statistics dashboard</p>
+                    <div class="mt-5 pt-5 position-relative" >
+                        <div class="mx-auto bg-info  statistics-tree-bar"></div>
+                        <div class="row ">
+                            <div class="col-md-4  col-11 mx-auto statistics-card-wrapper">
+                                <div class="shadow px-4 py-3 bg-white statistics-card ">
+                                    <div class="position-relative">
+                                        <div class="card-icon ">
+                                            <img src="assets/images/icon-brand-recognition.svg" alt="" class="w-100">
+                                        </div>
+                                    </div>
+                                    <div class="h5 mt-5 mb-3 card-title" >Branch Recognition</div>
+                                    <p><small>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quisquam reiciendis aut soluta numquam temporibus deleniti vel totam placeat. Ratione repellendus necessitatibus perferendis dignissimos voluptatibus
+                                    </small></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-11 mx-auto statistics-card-wrapper">
+                                <div class="shadow px-4 py-3 bg-white statistics-card">
+                                    <div class="position-relative">
+                                        <div class="card-icon ">
+                                            <img src="assets/images/icon-detailed-records.svg" alt="" class="w-100">
+                                        </div>
+                                    </div>
+                                    <div class="h5 mt-5 mb-3 card-title">Detailed Records</div>
+                                    <p><small>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quisquam reiciendis aut soluta numquam temporibus deleniti vel totam placeat. Ratione repellendus necessitatibus perferendis dignissimos voluptatibus
+                                    </small></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4  col-11 mx-auto statistics-card-wrapper">
+                                <div class="shadow px-4 py-3 bg-white statistics-card">
+                                    <div class="position-relative">
+                                        <div class="card-icon ">
+                                            <img src="assets/images/icon-fully-customizable.svg" alt="" class="w-100">
+                                        </div>
+                                    </div>
+                                    <div class="h5 mt-5 mb-3 card-title">Fully Customizable</div>
+                                    <p><small>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quisquam reiciendis aut soluta numquam temporibus deleniti vel totam placeat. Ratione repellendus necessitatibus perferendis dignissimos voluptatibus
+                                    </small></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+           </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="w-00 px-0 position-relative " style="border-radius: 10px; background: url('assets/images/bg-boost-desktop.svg'); background-position:center ; background-size: cover;">
+        <div class="position-absolute h-100 w-100" style="background-color: #4b3f6b; opacity: 0.9;" >
+        </div>
+        <div class="p-5 w-100 text-center position-relative" style="z-index: 999;">
+            <div class="h3 mb-3 text-white">Boost your links today</div>
+            <button class="btn btn-info px-4 rounded-pill text-white">Get Started</button>    
+        </div>
+    </div>
+</section>
+
+<!-- footer menu -->
+
+<section class="bg-dark">
+	<div class="container">
+		<div class="row py-3 text-white">
+			<div class="col-md-3 col-11 mx-auto py-md-4 py-2 px-md-0 px-3">
+				<h5 class="my-md-4 my-2  h4 font-weight-bold">Shortly</h5>
+			</div>
+			
+            <div class="col-md-6 col-11 mx-auto  px-md-0 px-3">
+                <div class="row g-0">
+                    <div class="col-md-4 col-12 py-md-4 py-2 px-md-0 px-3">
+                        <div class="my-md-4 my-2  font-weight-bold">Features</div>
+                        <div class=" custom-footer-menu text-light">
+                            <div>Link shortening</div>
+                            <div>Branded Links</div>
+                            <div>Analytics</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 py-md-4 py-2 px-md-0 px-3">
+                        <div class="my-md-4 my-2  font-weight-bold">Resouces</div>
+                        <div class=" custom-footer-menu text-light">
+                            <div>Blog</div>
+                            <div>Developers</div>
+                            <div>Support</div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-4 col-12 py-md-4 py-2 px-md-0 px-3">
+                        <div class="my-md-4 my-2  font-weight-bold">Company</div>
+                        <div class=" custom-footer-menu text-light">
+                            <div>About</div>
+                            <div>Our Team</div>
+                            <div>Careers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-11 mx-auto  py-md-4 py-2 mt-4 px-md-0 px-3">
+				<span class="footer-social-links"><img src="assets/images/icon-facebook.svg" alt="" class="w-100"></span>
+				<span class="footer-social-links"><img src="assets/images/icon-twitter.svg" alt="" class="w-100"></span>
+				<span class="footer-social-links"><img src="assets/images/icon-pinterest.svg" alt="" class="w-100"></span>
+				<span class="footer-social-links"><img src="assets/images/icon-instagram.svg" alt="" class="w-100"></span>
+			</div>
+			
+		</div>
+	</div>
+</section>
+
